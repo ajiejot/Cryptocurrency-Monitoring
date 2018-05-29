@@ -1,8 +1,6 @@
 import React from 'react'
 import NumberFormat from 'react-number-format';
 
-const noPrice ="gaga"
-const test= 100000000;
 const Coins = (props) => (
     <div>
         <table className="paleBlueRows">

@@ -4,7 +4,6 @@ import Title from './components/Title';
 import Form from './components/Form';
 import axios from 'axios';
 import Coins from './components/Coins';
-import Search from './components/Search';
 
 
 const limit = 99999999   //NO LIMIT
