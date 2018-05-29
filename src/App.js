@@ -53,7 +53,7 @@ class App extends Component {
 
 
     getInfo = () =>{
-      axios.get(`https://api.coinmarketcap.com/v1/ticker/${this.state.searchQuery}/`)
+      axios.get(`https://api.coinmarketcap.com/v1/ticker/${this.state.searchQuery}/?limit=${limit}`)
       .then(res=>{
         this.setState({
           data:res.data,
