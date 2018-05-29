@@ -7,6 +7,8 @@ import Coins from './components/Coins';
 import Search from './components/Search';
 
 
+const limit = 99999999   //NO LIMIT
+
 class App extends Component {
   constructor(props){
     super(props)
@@ -25,8 +27,9 @@ class App extends Component {
     }
 
     componentWillMount(){
-      axios.get(`https://api.coinmarketcap.com/v1/ticker/`)
+      axios.get(`https://api.coinmarketcap.com/v1/ticker/?limit=${limit}`)
       .then(res=> {
+          // for particular coin only
           // var wanted = ["bitcoin", "ethereum", "litecoin"];
           // var result = res.data.filter(currency => wanted.includes(currency.id));
           this.setState({ data: res.data});
