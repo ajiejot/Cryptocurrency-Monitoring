@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Title from './components/Title';
 import Form from './components/Form';
 import axios from 'axios';
-import Coins from './components/Coins'
+import Coins from './components/Coins';
+import Search from './components/Search';
+
 
 class App extends Component {
   constructor(props){
@@ -17,7 +18,8 @@ class App extends Component {
       symbol: undefined,
       rank: undefined,
       price: undefined,
-      marketcap: undefined    
+      marketcap: undefined,
+      error: undefined 
     }
 
     }
@@ -33,40 +35,53 @@ class App extends Component {
 
     }
 
-    handleChange(e){
+    handleChange(e){      
       this.setState({
         searchQuery: e.target.value
-      })
-      e.preventDefault()
-    }
-
-    searchCoin(e){
-      e.preventDefault()
-      const query = e.target.elements.query.value;
-      axios.get(`https://api.coinmarketcap.com/v1/ticker/${query}/`)
-      .then(res=>{
-        if (query || query===''){
-         this.setState({ data: res.data});
+      }, () => {
+        if (this.state.searchQuery && this.state.searchQuery.length > 1 ){
+            this.getInfo()          
+        } else if (!this.state.searchQuery){
+          this.getInfo() 
         }
-         else {
-           alert("enter please")
-         }
+      } )
+    } 
+
+
+
+    getInfo = () =>{
+      axios.get(`https://api.coinmarketcap.com/v1/ticker/${this.state.searchQuery}/`)
+      .then(res=>{
+        this.setState({
+          data:res.data,
+          error: ''
+        })
       })
       .catch(error=>{
-        alert("Invalid Coin Name!!")
+        this.setState({
+          data : [],
+          error : "Coin not found!"
+        })
       })
-     
     }
+
 
 
     render(){
 
       return(
         <div>
+          
           <Title />
           <h1>You are searching for {this.state.searchQuery}</h1>
-          <Form searchQuery={this.state.searchQuery} handleChange={this.handleChange.bind(this)} searchCoin={this.searchCoin.bind(this)}/>
+
+          <Form searchQuery={this.state.searchQuery} 
+          handleChange={this.handleChange.bind(this)} 
+          error={this.state.error}
+          /*searchCoin={this.searchCoin.bind(this)}*/ 
+          />
           <Coins data={this.state.data} />
+        
         </div>
 
        );

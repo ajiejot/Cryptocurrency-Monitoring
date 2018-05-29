@@ -53,3 +53,7 @@ td, th {
 tr:nth-child(even) {
   background-color: #eeeeee;
 }
+
+.error{
+  color: red
+}

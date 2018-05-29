@@ -1,2 +1,2 @@
 # Cryptocurrency-Monitoring
-Cryptocurrency list using coinmarketcap API.
+Cryptocurrency list (top 100) using coinmarketcap API.

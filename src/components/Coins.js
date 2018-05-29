@@ -1,4 +1,6 @@
 import React from 'react'
+import NumberFormat from 'react-number-format';
+
 
 const test= 100000000;
 const Coins = (props) => (
@@ -19,8 +21,15 @@ const Coins = (props) => (
                     <th>{coin.rank}</th>
                     <th>{coin.symbol}</th>
                     <th>{coin.name}</th>
-                    <th>{coin.price_usd}</th>
-                    <th>{coin.market_cap_usd}</th>
+                    <th><NumberFormat value={coin.price_usd} 
+                    thousandSeparator={true} 
+                    displayType={'text'} prefix={'$'}
+                    /></th>
+
+                    <th><NumberFormat value={coin.market_cap_usd}
+                     displayType={'text'} decimalPrecision={2} thousandSeparator={true}
+                     prefix={'$'}
+                     /></th>
                 </tr>
             )}
             </tbody>
